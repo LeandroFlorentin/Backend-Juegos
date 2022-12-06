@@ -5,8 +5,7 @@ const path = require('path');
 const {
   DB_DEPLOY
 } = process.env;
-
-const sequelize = new Sequelize(DB_DEPLOY, {
+const sequelize = new Sequelize('postgresql://postgres:0YBAj1fJS0SAHwsw90B2@containers-us-west-117.railway.app:7089/railway', {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
