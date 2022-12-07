@@ -27,7 +27,7 @@ const PORT = process.env.PORT || 3001;
 // Syncing all the models at once.
 conn.sync({ force: true }).then(async () => {
   loadDB()
-  server.listen(7089, () => {
-    console.log("FUNCIONANDO EN " + 7089);
+  server.listen(PORT, () => {
+    console.log("FUNCIONANDO EN " + PORT);
   });
 }); 
