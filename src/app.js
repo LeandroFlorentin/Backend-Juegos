@@ -25,7 +25,7 @@ server.use((req, res, next) => {
   next();
 });
 server.get('/', async (req, res) => {
-  const respuestaApi = await axios.get(`https://api.rawg.io/api/genres?key=9f66ff818d524f568275bc55ca2257c4`)
+  const respuestaApi = await axios.get(`https://restcountries.com/v3/all`)
   try {
     res.status(200).json(respuestaApi)
   } catch (error) {
