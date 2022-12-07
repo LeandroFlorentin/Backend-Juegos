@@ -23,8 +23,8 @@ const { conn } = require('./src/db.js');
 const loadDB = require('./src/controllers/loadDB.js')
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(async () => {
-  /*   loadDB() */
+conn.sync({ force: true }).then(() => {
+  loadDB()
   server.listen(process.env.PORT, () => {
     console.log("FUNCIONANDO EN " + process.env.PORT);
   });
