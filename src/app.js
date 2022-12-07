@@ -3,6 +3,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
+const { Genero } = require('./db.js')
+const { traerGeneros } = require('./helper')
 require('pg')
 
 require('./db.js');
@@ -21,12 +23,26 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  /*   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE'); */
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
 
-server.use('/', routes);
-
+/* server.use('/', routes); */
+server.get('/', async (req, res, next) => {
+  try {
+    const genero = await Genero.findAll()
+    if (!genero.length) {
+      let arrayGenero = await traerGeneros()
+      const arrayNuevo = await Genero.bulkCreate(arrayGenero)
+      res.status(200).json(arrayNuevo.map(gen => gen.nombre))
+    }
+    else {
+      res.status(200).json(genero.map(gen => gen.nombre))
+    }
+  } catch (error) {
+    next(error)
+  }
+})
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;
