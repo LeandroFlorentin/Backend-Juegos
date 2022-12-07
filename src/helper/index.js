@@ -1,4 +1,5 @@
 const axios = require('axios')
+require('pg')
 
 const apiKey = "9f66ff818d524f568275bc55ca2257c4";
 
