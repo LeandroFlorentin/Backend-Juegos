@@ -34,10 +34,12 @@ server.get('/', async (req, res, next) => {
     if (!genero.length) {
       let arrayGenero = await traerGeneros()
       const arrayNuevo = await Genero.bulkCreate(arrayGenero)
-      res.status(200).json(arrayNuevo.map(gen => gen.nombre))
+      const enviar = arrayNuevo.map(gen => gen.nombre)
+      res.status(200).json(enviar)
     }
     else {
-      res.status(200).json(genero.map(gen => gen.nombre))
+      const enviar = genero.map(gen => gen.nombre)
+      res.status(200).json(enviar)
     }
   } catch (error) {
     next(error)
