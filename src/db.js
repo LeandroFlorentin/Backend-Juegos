@@ -5,10 +5,12 @@ const path = require('path');
 const {
   DB_DEPLOY
 } = process.env;
+const todo = require('pg')
 
 const sequelize = new Sequelize("postgresql://postgres:0YBAj1fJS0SAHwsw90B2@containers-us-west-117.railway.app:7089/railway", {
   logging: false,
   native: false,
+  dialectModule: todo
   /*   dialectOptions: {
       ssl: {
         require: true
