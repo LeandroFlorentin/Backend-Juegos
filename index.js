@@ -26,6 +26,6 @@ const loadDB = require('./src/controllers/loadDB.js')
 conn.sync({ force: true }).then(async () => {
   loadDB()
   server.listen(process.env.PORT, () => {
-    console.log("FUNCIONANDO EN " + PORT);
+    console.log("FUNCIONANDO EN " + process.env.PORT);
   });
 }); 
