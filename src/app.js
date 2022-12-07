@@ -24,8 +24,9 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
-server.get('/', (req, res) => {
-  res.status(200).json([1, 2, 3, 4])
+server.get('/', async (req, res) => {
+  const respuestaApi = await axios.get(`https://api.rawg.io/api/genres?key=9f66ff818d524f568275bc55ca2257c4`)
+  res.status(200).json(respuestaApi)
 })
 server.use('/', routes);
 
