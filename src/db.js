@@ -9,11 +9,11 @@ const {
 const sequelize = new Sequelize(DB_DEPLOY, {
   logging: false,
   native: false,
-  dialectOptions: {
-    ssl: {
-      require: true
-    }
-  }
+  /*   dialectOptions: {
+      ssl: {
+        require: true
+      }
+    } */
 });
 
 const basename = path.basename(__filename);
