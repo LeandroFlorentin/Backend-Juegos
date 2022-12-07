@@ -1,5 +1,6 @@
 const { Videogame, Genero } = require('../db.js')
 const { traerJuegos, traerJuego } = require('../helper')
+require('pg')
 
 const mostrarTodo = async (req, res, next) => {
     const { name } = req.query
