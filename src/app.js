@@ -25,8 +25,9 @@ server.use((req, res, next) => {
   next();
 });
 server.get('/', async (req, res) => {
+  const respuestaApi = await axios.get(`https://restcountries.com/v3/all`)
   try {
-    res.status(200).json([1, 2, 3, 4, 5, 6])
+    res.status(200).json(respuestaApi)
   } catch (error) {
     res.status(404).json('Erroooor')
   }
