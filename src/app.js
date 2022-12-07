@@ -24,14 +24,7 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
-server.get('/', async (req, res) => {
-  const respuestaApi = await axios.get(`https://restcountries.com/v3/all`)
-  try {
-    res.status(200).json(respuestaApi)
-  } catch (error) {
-    res.status(404).json('Erroooor')
-  }
-})
+
 server.use('/', routes);
 
 // Error catching endware.

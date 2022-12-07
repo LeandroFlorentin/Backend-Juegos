@@ -2,33 +2,34 @@ const { Videogame, Genero } = require('../db.js')
 const { traerJuegos, traerJuego } = require('../helper')
 
 const mostrarTodo = async (req, res, next) => {
-    const { name } = req.query
-    try {
-        let juegosApi = await traerJuegos();
-        let juegos = await Videogame.findAll({
-            include: [{ model: Genero, attributes: ['nombre'], through: { attributes: [] } }]
-        })
-        let totalJuegos = juegos.concat(juegosApi)
-        if (!name) {
-            res.status(200).json(totalJuegos)
-        } else {
-            let arrayEnviar = []
-            let i = 0;
-            while (true) {
-                if (arrayEnviar.length === 15) break
-                if (i === totalJuegos.length - 1) break
-                let arrayName = totalJuegos[i].name.split(" ").join("").toLowerCase()
-                let busqueda = name.split(" ").join("").toLowerCase()
-                if (arrayName.includes(busqueda)) {
-                    arrayEnviar.push(totalJuegos[i])
+    res.status(200).json("hola")
+    /*     const { name } = req.query
+        try {
+            let juegosApi = await traerJuegos();
+            let juegos = await Videogame.findAll({
+                include: [{ model: Genero, attributes: ['nombre'], through: { attributes: [] } }]
+            })
+            let totalJuegos = juegos.concat(juegosApi)
+            if (!name) {
+                res.status(200).json(totalJuegos)
+            } else {
+                let arrayEnviar = []
+                let i = 0;
+                while (true) {
+                    if (arrayEnviar.length === 15) break
+                    if (i === totalJuegos.length - 1) break
+                    let arrayName = totalJuegos[i].name.split(" ").join("").toLowerCase()
+                    let busqueda = name.split(" ").join("").toLowerCase()
+                    if (arrayName.includes(busqueda)) {
+                        arrayEnviar.push(totalJuegos[i])
+                    }
+                    i++
                 }
-                i++
+                res.status(200).json(arrayEnviar)
             }
-            res.status(200).json(arrayEnviar)
-        }
-    } catch (error) {
-        next(error)
-    }
+        } catch (error) {
+            next(error)
+        } */
 }
 
 const mostrarUno = async (req, res, next) => {
