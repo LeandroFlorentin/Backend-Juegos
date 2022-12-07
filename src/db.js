@@ -1,3 +1,4 @@
+require("pg")
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
@@ -5,7 +6,6 @@ const path = require('path');
 const {
   DB_DEPLOY
 } = process.env;
-require('pg')
 
 const sequelize = new Sequelize("postgresql://postgres:0YBAj1fJS0SAHwsw90B2@containers-us-west-117.railway.app:7089/railway", {
   logging: false,

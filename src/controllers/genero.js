@@ -1,6 +1,5 @@
 const { Genero } = require('../db.js')
 const { traerGeneros } = require('../helper')
-require('pg')
 
 const mostrarGeneros = async (req, res, next) => {
     try {
