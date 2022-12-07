@@ -6,9 +6,14 @@ const {
   DB_DEPLOY
 } = process.env;
 console.log(DB_DEPLOY)
-const sequelize = new Sequelize(`${DB_DEPLOY}`, {
+const sequelize = new Sequelize(DB_DEPLOY, {
   logging: false,
   native: false,
+  dialectOptions: {
+    ssl: {
+      require: true
+    }
+  }
 });
 
 const basename = path.basename(__filename);
