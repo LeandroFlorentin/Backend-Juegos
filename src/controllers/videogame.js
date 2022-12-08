@@ -5,12 +5,13 @@ const mostrarTodo = async (req, res, next) => {
     const { name } = req.query
     try {
         let juegosApi = await traerJuegos();
-        /*         let juegos = await Videogame.findAll({
-                    include: [{ model: Genero, attributes: ['nombre'], through: { attributes: [] } }]
-                }) */
+        let juegos = await Videogame.findAll({
+            include: [{ model: Genero, attributes: ['nombre'], through: { attributes: [] } }]
+        })
         let totalJuegos = juegos.concat(juegosApi)
-        res.status(200).json(totalJuegos)
-        /* else {
+        if (!name) {
+            res.status(200).json(totalJuegos)
+        } else {
             let arrayEnviar = []
             let i = 0;
             while (true) {
@@ -24,7 +25,7 @@ const mostrarTodo = async (req, res, next) => {
                 i++
             }
             res.status(200).json(arrayEnviar)
-        } */
+        }
     } catch (error) {
         next(error)
     }
