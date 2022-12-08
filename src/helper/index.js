@@ -2,8 +2,9 @@ const axios = require('axios')
 
 module.exports = {
     traerGeneros: async () => {
-        return await axios.get(`https://api.rawg.io/api/genres?key=9f66ff818d524f568275bc55ca2257c4`)
-            .then(datos => datos.data.results.map(dato => ({ nombre: dato.name })))
+        return fetch(`https://api.rawg.io/api/genres?key=9f66ff818d524f568275bc55ca2257c4`)
+            .then(res => res.json())
+            .then(datos => datos.data.map(dato => ({ nombre: dato.name })))
     },
     traerJuegos: async () => {
         const paginaUno = await axios.get(`https://api.rawg.io/api/games?key=9f66ff818d524f568275bc55ca2257c4&page_size=40`)
