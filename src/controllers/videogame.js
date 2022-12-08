@@ -4,11 +4,11 @@ const { traerJuegos, traerJuego } = require('../helper')
 const mostrarTodo = async (req, res, next) => {
     const { name } = req.query
     try {
-        /*         let juegosApi = await traerJuegos(); */
-        let juegos = await Videogame.findAll({
-            include: [{ model: Genero, attributes: ['nombre'], through: { attributes: [] } }]
-        })
-        let totalJuegos = juegos/* .concat(juegosApi) */
+        let juegosApi = await traerJuegos();
+        /*         let juegos = await Videogame.findAll({
+                    include: [{ model: Genero, attributes: ['nombre'], through: { attributes: [] } }]
+                }) */
+        let totalJuegos = juegosApi
         res.status(200).json(totalJuegos)
         /* else {
             let arrayEnviar = []
