@@ -8,11 +8,11 @@ module.exports = {
     traerJuegos: async () => {
         const paginaUno = await axios.get(`https://api.rawg.io/api/games?key=9f66ff818d524f568275bc55ca2257c4&page_size=40`)
             .then(ele => ele.data.results)
-        const paginaDos = await axios.get(`https://api.rawg.io/api/games?key=9f66ff818d524f568275bc55ca2257c4&page_size=40&page=3`)
-            .then(ele => ele.data.results)
-        const paginaTres = await axios.get(`https://api.rawg.io/api/games?key=9f66ff818d524f568275bc55ca2257c4&page_size=20&page=4`)
-            .then(ele => ele.data.results)
-        return [...paginaUno, ...paginaDos, ...paginaTres].map(ele => ({
+        /*         const paginaDos = await axios.get(`https://api.rawg.io/api/games?key=9f66ff818d524f568275bc55ca2257c4&page_size=40&page=3`)
+                    .then(ele => ele.data.results)
+                const paginaTres = await axios.get(`https://api.rawg.io/api/games?key=9f66ff818d524f568275bc55ca2257c4&page_size=20&page=4`)
+                    .then(ele => ele.data.results) */
+        return [...paginaUno/* , ...paginaDos, ...paginaTres */].map(ele => ({
             id: ele.id,
             name: ele.name,
             background_image: ele.background_image,
