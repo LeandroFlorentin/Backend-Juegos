@@ -9,9 +9,8 @@ const mostrarTodo = async (req, res, next) => {
             include: [{ model: Genero, attributes: ['nombre'], through: { attributes: [] } }]
         })
         let totalJuegos = juegos.concat(juegosApi)
-        if (!name) {
-            res.status(200).json(totalJuegos)
-        } else {
+        res.status(200).json(totalJuegos)
+        /* else {
             let arrayEnviar = []
             let i = 0;
             while (true) {
@@ -25,7 +24,7 @@ const mostrarTodo = async (req, res, next) => {
                 i++
             }
             res.status(200).json(arrayEnviar)
-        }
+        } */
     } catch (error) {
         next(error)
     }
