@@ -7,7 +7,7 @@ const {
   DB_DEPLOY
 } = process.env;
 
-const sequelize = new Sequelize("postgresql://postgres:0YBAj1fJS0SAHwsw90B2@containers-us-west-117.railway.app:7089/railway", {
+const sequelize = new Sequelize("postgres://db_videogames_user:nCpRwTXMd2G8Fkd8mVpLGtMLa6WGpyG9@dpg-ce8cge02i3mlmrfb55hg-a.oregon-postgres.render.com/db_videogames", {
   logging: false,
   native: false,
 });
