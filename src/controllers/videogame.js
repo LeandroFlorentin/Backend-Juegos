@@ -1,12 +1,12 @@
-const { Videogame, Genero } = require('../db.js')
+const { VideogameVal, GeneroVal } = require('../db.js')
 const { traerJuegos, traerJuego } = require('../helper')
 
 const mostrarTodo = async (req, res, next) => {
     const { name } = req.query
     try {
         let juegosApi = await traerJuegos();
-        let juegos = await Videogame.findAll({
-            include: [{ model: Genero, attributes: ['nombre'], through: { attributes: [] } }]
+        let juegos = await VideogameVal.findAll({
+            include: [{ model: GeneroVal, attributes: ['nombre'], through: { attributes: [] } }]
         })
         let totalJuegos = juegos.concat(juegosApi)
         if (!name) {
@@ -35,9 +35,9 @@ const mostrarUno = async (req, res, next) => {
     const { id } = req.params
     try {
         if (String(Number(id)) === "NaN") {
-            let juego = await Videogame.findOne({
+            let juego = await VideogameVal.findOne({
                 where: { id: id },
-                include: Genero
+                include: GeneroVal
             })
             res.status(200).json(juego)
         } else {
@@ -54,7 +54,7 @@ const crearUno = async (req, res, next) => {
     try {
         if (rating === '') rating = null;
         if (released === '') released = null;
-        const newProject = await Videogame.create({
+        const newProject = await VideogameVal.create({
             name,
             background_image,
             platforms,
@@ -62,7 +62,7 @@ const crearUno = async (req, res, next) => {
             released,
             description_raw
         })
-        const allGenres = await Genero.findAll({ where: { nombre: genres } })
+        const allGenres = await Val.findAll({ where: { nombre: genres } })
         newProject.addGenero(allGenres)
         res.status(201).json(`Juego ${newProject.dataValues.name} creado`)
     } catch (error) {
@@ -74,7 +74,7 @@ const eliminarUno = async (req, res, next) => {
     const { id } = req.params
     try {
         let juegosApi = await traerJuegos();
-        const nuevoArr = await Videogame.destroy({
+        const nuevoArr = await VideogameVal.destroy({
             where: {
                 id: id
             }
