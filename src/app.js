@@ -13,11 +13,10 @@ const server = express();
 
 server.name = 'API';
 
+const list = ["https://videogames-chi.vercel.app/"]
+
 server.use(cors({
-  origin: "https://videogames-chi.vercel.app/",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: false,
-  optionsSuccessStatus: 204
+  origin: list
 }))
 server.use(express.json())
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
