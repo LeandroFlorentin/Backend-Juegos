@@ -13,7 +13,12 @@ const server = express();
 
 server.name = 'API';
 
-server.use(cors())
+server.use(cors({
+  origin: "https://videogames-chi.vercel.app/",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}))
 server.use(express.json())
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));

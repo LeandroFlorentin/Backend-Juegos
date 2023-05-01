@@ -7,6 +7,12 @@ const mostrarTodo = async (req, res, next) => {
         let juegosApi = await traerJuegos();
         let juegos = await VideogameVal.findAll({
             include: [{ model: GeneroVal, attributes: ['nombre'], through: { attributes: [] } }]
+        }).map(value => {
+            let obj = {}
+            for (let i in value) {
+                if ([i] === "platforms") obj = { ...obj, [i]: JSON.parse(value[i]) }
+                else obj = { ...obj, [i]: value[i] }
+            }
         })
         let totalJuegos = juegos.concat(juegosApi)
         if (!name) {
@@ -39,10 +45,10 @@ const mostrarUno = async (req, res, next) => {
                 where: { id: id },
                 include: GeneroVal
             })
-            res.status(200).json(juego)
+            res.status(200).json({ ...juego, platforms: JSON.parse(juego.platforms) })
         } else {
             let unJuego = await traerJuego(id)
-            res.status(200).json(unJuego)
+            res.status(200).json({ ...unJuego, platforms: JSON.parse(juego.platforms) })
         }
     } catch (error) {
         next(error)
@@ -57,7 +63,7 @@ const crearUno = async (req, res, next) => {
         const newProject = await VideogameVal.create({
             name,
             background_image,
-            platforms,
+            platforms: JSON.stringify(platforms),
             rating,
             released,
             description_raw
